@@ -1,0 +1,21 @@
+{
+    "name": "rafapaulino/calendar",
+    "description": "PHP Package for Calendar",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rafael Paulino",
+            "email": "rafaclasses@gmail.com"
+        }
+    ],
+    "require": {
+        "tightenco/collect": "^8.19"
+    },
+    "autoload": {
+        "psr-4": { "Calendar\\": "src/" },
+        "classmap": [
+            "src"
+        ]
+    }
+}

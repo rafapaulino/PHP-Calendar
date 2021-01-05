@@ -103,4 +103,30 @@ class DaysWeek
         $obj->fullName = _("Saturday");
         return $obj;
     }
+
+    public function setFirst(int $key = 1)
+    {
+        if ($key > 0) {
+            $original = $this->days;
+            $slice = $original->slice($key);
+            $remainder = $original->slice(0,$key);
+
+            $days = array();
+
+            foreach($slice->all() as $key => $value)
+            {
+                $days[$key] = $value;
+            }
+
+            foreach($remainder->all() as $key => $value)
+            {
+                $days[$key] = $value;
+            }
+
+            $this->days = new Collection($days);
+
+            return $this;
+        }
+
+    }
 }

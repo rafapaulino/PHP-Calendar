@@ -7,9 +7,6 @@ use Calendar\DaysWeek;
 $days = new DaysWeek;
 $semana = $days->getDays();
 
-$slice = $semana->slice(0,1);
-var_dump($slice->all());
-
 foreach($semana->all() as $key => $value)
 {
     echo $key . '<br>';

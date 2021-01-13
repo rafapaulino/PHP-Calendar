@@ -127,6 +127,5 @@ class DaysWeek
 
             return $this;
         }
-
     }
 }

@@ -4,6 +4,7 @@ include 'vendor/autoload.php';
 
 use Calendar\DaysWeek;
 use Calendar\Months;
+use Calendar\Calendar;
 
 $days = new DaysWeek;
 $semana = $days->getDays();
@@ -44,6 +45,20 @@ foreach($m->all() as $key => $value)
     echo $value->fullName  . '<br><hr>';
 
 }
+
+echo '<hr><br><hr><br><br>';
+
+$calendar = new Calendar(1,2020);
+
+$week = $calendar->getDaysWeek();
+$month = $calendar->getMonth();
+$year = $calendar->getYear();
+
+echo '<pre>';
+var_dump($week);
+var_dump($month);
+var_dump($year);
+echo '</pre>';
 
 /*
 setlocale(LC_TIME, 'pt_BR.UTF-8'); 

@@ -52,6 +52,7 @@ class Months
         $obj->letter = _("J");
         $obj->shortName = _("Jan");
         $obj->fullName = _("January");
+        $obj->number = 1;
         return $obj;
     }
 
@@ -61,6 +62,7 @@ class Months
         $obj->letter = _("F");
         $obj->shortName = _("Feb");
         $obj->fullName = _("February");
+        $obj->number = 2;
         return $obj;
     }
 
@@ -70,6 +72,7 @@ class Months
         $obj->letter = _("M");
         $obj->shortName = _("Mar");
         $obj->fullName = _("March");
+        $obj->number = 3;
         return $obj;
     }
 
@@ -79,6 +82,7 @@ class Months
         $obj->letter = _("A");
         $obj->shortName = _("Apr");
         $obj->fullName = _("April");
+        $obj->number = 4;
         return $obj;
     }
 
@@ -88,6 +92,7 @@ class Months
         $obj->letter = _("M");
         $obj->shortName = _("May");
         $obj->fullName = _("May");
+        $obj->number = 5;
         return $obj;
     }
 
@@ -97,6 +102,7 @@ class Months
         $obj->letter = _("J");
         $obj->shortName = _("Jun");
         $obj->fullName = _("June");
+        $obj->number = 6;
         return $obj;
     }
 
@@ -106,6 +112,7 @@ class Months
         $obj->letter = _("J");
         $obj->shortName = _("Jul");
         $obj->fullName = _("July");
+        $obj->number = 7;
         return $obj;
     }
 
@@ -115,6 +122,7 @@ class Months
         $obj->letter = _("A");
         $obj->shortName = _("Aug");
         $obj->fullName = _("August");
+        $obj->number = 8;
         return $obj;
     }
 
@@ -124,6 +132,7 @@ class Months
         $obj->letter = _("S");
         $obj->shortName = _("Sep");
         $obj->fullName = _("September");
+        $obj->number = 9;
         return $obj;
     }
 
@@ -133,6 +142,7 @@ class Months
         $obj->letter = _("O");
         $obj->shortName = _("Oct");
         $obj->fullName = _("October");
+        $obj->number = 10;
         return $obj;
     }
 
@@ -142,6 +152,7 @@ class Months
         $obj->letter = _("N");
         $obj->shortName = _("Nov");
         $obj->fullName = _("November");
+        $obj->number = 11;
         return $obj;
     }
 
@@ -151,6 +162,7 @@ class Months
         $obj->letter = _("D");
         $obj->shortName = _("Dec");
         $obj->fullName = _("December");
+        $obj->number = 12;
         return $obj;
     }
 }

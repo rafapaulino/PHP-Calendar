@@ -4,30 +4,25 @@ namespace Calendar;
 
 use Tightenco\Collect\Support\Collection;
 use Carbon\Carbon;
-use Calendar\DaysWeek;
-use Calendar\Months;
+
 
 class Calendar implements CalendarInterface
 {
-    protected $week, $month, $year, $firstDayMonth, $numberDays, $dayOfWeek, $currentDay;
+    protected $date, $week, $month, $year, $start, $end;
 
-    public function __construct(int $month, int $year)
+    public function __construct(int $month, int $year, int $firstDayWeek = 0)
     {
         $this->week = new DaysWeek;
+        //set first day of week
+        if ($firstDayWeek > 0 && in_array($firstDayWeek, range(0,6))) {
+            $this->week->setFirst($firstDayWeek);
+        }
+
         $this->setMonth($month);
         $this->setYear($year);
-        $this->setFirstDayMonth();
-        $this->setNumberDays();
-        $this->setDayOfWeek();
-        $this->setCurrentDay();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDaysWeek()
-    {
-        return $this->week->getDays()->all();
+        $this->setDate();
+        $this->setStart();
+        $this->setEnd();
     }
 
     protected function setMonth(int $month): void
@@ -65,98 +60,121 @@ class Calendar implements CalendarInterface
         return $this->year;
     }
 
-    protected function setFirstDayMonth(): void
+    /**
+     * @return mixed
+     */
+    public function getDate()
     {
+        return $this->date;
+    }
+
+    protected function setDate(): void
+    {
+        $year = $this->getYear();
         $month = $this->getMonth();
-        // What is the first day of the month in question?
-        $this->firstDayMonth = mktime(0,0,0,$month->number,1,$this->getYear());
+        $this->date = Carbon::createFromDate($year, $month->number, 1);
     }
 
     /**
      * @return mixed
      */
-    public function getFirstDayMonth()
+    public function getDaysWeek()
     {
-        return $this->firstDayMonth;
+        return $this->week->getDays()->all();
     }
 
     /**
      * @return mixed
      */
-    public function getNumberDays()
+    public function getStart()
     {
-        return $this->numberDays;
-    }
-
-    protected function setNumberDays(): void
-    {
-        // How many days does this month contain?
-        $numberDays = date('t',$this->getFirstDayMonth());
-        $this->numberDays = $numberDays;
+        return $this->start;
     }
 
     /**
-     * @return mixed
+     * @param mixed $start
      */
-    public function getDayOfWeek()
+    public function setStart(): void
     {
-        return $this->dayOfWeek;
-    }
-
-    public function setDayOfWeek(): void
-    {
-        // Retrieve some information about the first day of the
-        // month in question.
-        $date = getdate($this->getFirstDayMonth());
-
         // What is the index value (0-6) of the first day of the
         // month in question.
-        $this->dayOfWeek = $date["wday"];
+        $dayWeek = $this->date->dayOfWeek;
+
+        //get days before this month
+        if ($dayWeek > 0) {
+            $start = $this->date->copy()->subDays($dayWeek);
+        } else {
+            $start = $this->date;
+        }
+        $this->start = $start;
     }
 
     /**
      * @return mixed
      */
-    public function getCurrentDay()
+    public function getEnd()
     {
-        return $this->currentDay;
+        return $this->end;
     }
 
     /**
-     * @param int $number
+     * @param mixed $end
      */
-    public function setCurrentDay(int $number = 1): void
+    public function setEnd(): void
     {
-        $this->currentDay = $number;
-    }
+        $end = $this->date->endOfMonth();
+        // What is the index value (0-6) of the last day of the
+        // month in question.
+        $dayWeek = $end->dayOfWeek;
 
-    public function getDays(int $number = 0)
-    {
-        //set first day of week
-        if (in_array($number, range(0,6))) {
-            $this->week->setFirst($number);
+        //get days before this month
+        if ($dayWeek < 6) {
+            $days = intval(6 - $dayWeek);
+            $end = $end->copy()->addDays($days);
         }
 
-        //get month
-        $month = $this->getMonth();
-
-        //get year
-        $year = $this->getYear();
-
-        //get all days of week with name, letter and shortname
-        $week = $this->getDaysWeek();
-
-        //get first day of Month
-        $first = $this->getFirstDayMonth();
-
-        //I take the total days of this month
-        $numberDays = $this->getNumberDays();
-
-        // What is the index value (0-6) of the first day of the
-        // month in question.
-        $dayOfWeek = $this->getDayOfWeek();
+        $this->end = $end;
+    }
 
 
+    public function getDays()
+    {
+        //get first day in calendar
+        $start = $this->getStart();
+        //var_dump($start);
+
+        //get last day in calendar
+        $end = $this->getEnd();
+        //var_dump($end);
+
+        //criar o range de datas para o calendario
+        /*
+         * https://icalendario.br.com/
+         * https://carbon.nesbot.com/docs/#api-period
+         * http://php.net/manual/en/class.dateperiod.php
+         * em cada loop voce gera um objeto de data com uma outra classe chamada Day
+         * talvez você possa gerar algo como uma semana no mesmo esquema
+         *
+         *
+         */
 
     }
+
+    /*
+    protected function day(int $day, int $weekday, $currentMonth = true)
+    {
+        $month = $this->getMonth();
+        $year = $this->getYear();
+        
+        $obj = new \stdClass();
+        $obj->day = $day;
+        $obj->weekday = $weekday;
+        $obj->month = $month;
+        $obj->year = $year;
+        $obj->date = Carbon::createFromDate($year, $month->number, $day);
+        $obj->currentMonth = $currentMonth;
+
+        return $obj;
+
+    }*/
 }

@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "tightenco/collect": "^8.19"
+        "tightenco/collect": "^8.19",
+        "nesbot/carbon": "^2.43"
     },
     "autoload": {
         "psr-4": { "Calendar\\": "src/" },

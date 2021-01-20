@@ -3,12 +3,13 @@
 namespace Calendar;
 
 use Tightenco\Collect\Support\Collection;
+use Carbon\Carbon;
 use Calendar\DaysWeek;
 use Calendar\Months;
 
 class Calendar implements CalendarInterface
 {
-    protected $week, $month, $year, $firstDayMonth, $numberDays, $dayOfWeek;
+    protected $week, $month, $year, $firstDayMonth, $numberDays, $dayOfWeek, $currentDay;
 
     public function __construct(int $month, int $year)
     {
@@ -18,14 +19,18 @@ class Calendar implements CalendarInterface
         $this->setFirstDayMonth();
         $this->setNumberDays();
         $this->setDayOfWeek();
+        $this->setCurrentDay();
     }
 
+    /**
+     * @return mixed
+     */
     public function getDaysWeek()
     {
         return $this->week->getDays()->all();
     }
 
-    protected function setMonth(int $month)
+    protected function setMonth(int $month): void
     {
         $months = new Months;
         $array_months = $months->getMonths()->all();
@@ -36,31 +41,40 @@ class Calendar implements CalendarInterface
         $this->month = $array_months[$month];
     }
 
+    /**
+     * @return mixed
+     */
     public function getMonth()
     {
         return $this->month;
     }
 
-    protected function setYear(int $year)
+    protected function setYear(int $year): void
     {
-        if (checkdate(1,1,$year)) {
-            $year = date("Y");
-        }
+        if (checkdate(1,1,$year))
+        $year = date("Y");
+        
         $this->year = $year;
     }
 
+    /**
+     * @return mixed
+     */
     public function getYear()
     {
         return $this->year;
     }
 
-    protected function setFirstDayMonth()
+    protected function setFirstDayMonth(): void
     {
         $month = $this->getMonth();
         // What is the first day of the month in question?
         $this->firstDayMonth = mktime(0,0,0,$month->number,1,$this->getYear());
     }
 
+    /**
+     * @return mixed
+     */
     public function getFirstDayMonth()
     {
         return $this->firstDayMonth;
@@ -100,6 +114,22 @@ class Calendar implements CalendarInterface
         $this->dayOfWeek = $date["wday"];
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCurrentDay()
+    {
+        return $this->currentDay;
+    }
+
+    /**
+     * @param int $number
+     */
+    public function setCurrentDay(int $number = 1): void
+    {
+        $this->currentDay = $number;
+    }
+
     public function getDays(int $number = 0)
     {
         //set first day of week
@@ -125,6 +155,7 @@ class Calendar implements CalendarInterface
         // What is the index value (0-6) of the first day of the
         // month in question.
         $dayOfWeek = $this->getDayOfWeek();
+
 
 
     }

@@ -50,9 +50,11 @@ echo '<hr><br><hr><br><br>';
 
 $calendar = new Calendar(1,2020);
 
-$week = $calendar->getDaysWeek();
 $month = $calendar->getMonth();
 $year = $calendar->getYear();
+
+$days = $calendar->getDays();
+$week = $calendar->getDaysWeek();
 
 echo '<pre>';
 var_dump($week);

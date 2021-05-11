@@ -5,10 +5,9 @@ namespace Calendar;
 use Tightenco\Collect\Support\Collection;
 use Carbon\Carbon;
 
-
 class Calendar implements CalendarInterface
 {
-    protected $date, $week, $month, $year, $start, $end;
+    protected $date, $week, $month, $year, $start, $end, $days;
 
     public function __construct(int $month, int $year, int $firstDayWeek = 0)
     {
@@ -23,6 +22,7 @@ class Calendar implements CalendarInterface
         $this->setDate();
         $this->setStart();
         $this->setEnd();
+        $this->setDays();
     }
 
     protected function setMonth(int $month): void
@@ -106,7 +106,7 @@ class Calendar implements CalendarInterface
         } else {
             $start = $this->date;
         }
-        $this->start = $start;
+        $this->start = $start->format('Y-m-d');
     }
 
     /**
@@ -133,48 +133,62 @@ class Calendar implements CalendarInterface
             $end = $end->copy()->addDays($days);
         }
 
-        $this->end = $end;
+        $this->end = $end->format('Y-m-d');
     }
 
 
-    public function getDays()
+    public function setDays(): void
     {
         //get first day in calendar
         $start = $this->getStart();
-        //var_dump($start);
 
         //get last day in calendar
         $end = $this->getEnd();
-        //var_dump($end);
 
-        //criar o range de datas para o calendario
-        /*
-         * https://icalendario.br.com/
-         * https://carbon.nesbot.com/docs/#api-period
-         * http://php.net/manual/en/class.dateperiod.php
-         * em cada loop voce gera um objeto de data com uma outra classe chamada Day
-         * talvez você possa gerar algo como uma semana no mesmo esquema
-         *
-         *
-         */
-
-    }
-
-    /*
-    protected function day(int $day, int $weekday, $currentMonth = true)
-    {
         $month = $this->getMonth();
         $year = $this->getYear();
-        
-        $obj = new \stdClass();
-        $obj->day = $day;
-        $obj->weekday = $weekday;
-        $obj->month = $month;
-        $obj->year = $year;
-        $obj->date = Carbon::createFromDate($year, $month->number, $day);
-        $obj->currentMonth = $currentMonth;
 
-        return $obj;
+        $days = array();
+        $loop = 0;
 
-    }*/
+        //create period
+        $period = Carbon::parse($start)->toPeriod($end, '1 day');
+        foreach ($period as $date)
+        {
+            $currentMonth = (($date->format('m') == $month->number) ? true:false);
+            $dayOfWeek = $this->setDayOfWeek($date->dayOfWeek);
+
+            $days[$loop] = new Day(
+                $year,
+                $month,
+                $date->format('d'),
+                $dayOfWeek,
+                $date,
+                $currentMonth
+            );
+            $loop++;
+        }
+
+        $this->days = new Collection($days);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDays()
+    {
+        return $this->days;
+    }
+
+    protected function setDayOfWeek(int $dayOfWeek)
+    {
+        if (!in_array($dayOfWeek, range(0,6)))
+            $dayOfWeek = 0;
+
+        foreach ($this->getDaysWeek() as $current)
+        {
+            if ($current->index == $dayOfWeek)
+                return $current;
+        }
+    }
 }

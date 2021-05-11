@@ -15,7 +15,6 @@ foreach($semana->all() as $key => $value)
     echo $value->letter  . '<br>';
     echo $value->shortName  . '<br>';
     echo $value->fullName  . '<br><hr>';
-
 }
 
 echo '<br><br><hr><br><br>';
@@ -48,7 +47,7 @@ foreach($m->all() as $key => $value)
 
 echo '<hr><br><hr><br><br>';
 
-$calendar = new Calendar(1,2020);
+$calendar = new Calendar(5,2021);
 
 $month = $calendar->getMonth();
 $year = $calendar->getYear();
@@ -60,6 +59,7 @@ echo '<pre>';
 var_dump($week);
 var_dump($month);
 var_dump($year);
+var_dump($days);
 echo '</pre>';
 
 /*

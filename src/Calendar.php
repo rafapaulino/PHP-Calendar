@@ -158,7 +158,7 @@ class Calendar implements CalendarInterface
             $currentMonth = (($date->format('m') == $month->number) ? true:false);
             $dayOfWeek = $this->setDayOfWeek($date->dayOfWeek);
 
-            $days[$loop] = new Day(
+            $day = new Day(
                 $year,
                 $month,
                 $date->format('d'),
@@ -166,6 +166,8 @@ class Calendar implements CalendarInterface
                 $date,
                 $currentMonth
             );
+            $days[$loop] = $day->getDay();
+            
             $loop++;
         }
 

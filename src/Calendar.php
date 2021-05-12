@@ -20,7 +20,7 @@ class Calendar implements CalendarInterface
         $this->setMonth($month);
         $this->setYear($year);
         $this->setDate();
-        $this->setStart();
+        $this->setStart($firstDayWeek);
         $this->setEnd();
         $this->setDays();
     }
@@ -94,11 +94,16 @@ class Calendar implements CalendarInterface
     /**
      * @param mixed $start
      */
-    public function setStart(): void
+    public function setStart($firstDayWeek): void
     {
         // What is the index value (0-6) of the first day of the
         // month in question.
         $dayWeek = $this->date->dayOfWeek;
+
+        //sets the date to the first day of the week
+        if ($dayWeek > $firstDayWeek) {
+            $dayWeek = $dayWeek - $firstDayWeek;
+        }
 
         //get days before this month
         if ($dayWeek > 0) {
@@ -120,12 +125,17 @@ class Calendar implements CalendarInterface
     /**
      * @param mixed $end
      */
-    public function setEnd(): void
+    public function setEnd($firstDayWeek): void
     {
         $end = $this->date->endOfMonth();
         // What is the index value (0-6) of the last day of the
         // month in question.
         $dayWeek = $end->dayOfWeek;
+
+        //sets the date to the first day of the week
+        if ($firstDayWeek > 0) {
+            $dayWeek = $dayWeek + $firstDayWeek;
+        }
 
         //get days before this month
         if ($dayWeek < 6) {

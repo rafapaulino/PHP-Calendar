@@ -21,7 +21,7 @@ class Calendar implements CalendarInterface
         $this->setYear($year);
         $this->setDate();
         $this->setStart($firstDayWeek);
-        $this->setEnd();
+        $this->setEnd($firstDayWeek);
         $this->setDays();
     }
 
@@ -101,8 +101,12 @@ class Calendar implements CalendarInterface
         $dayWeek = $this->date->dayOfWeek;
 
         //sets the date to the first day of the week
-        if ($dayWeek > $firstDayWeek) {
+        if ($dayWeek == $firstDayWeek) {
+            $dayWeek = 0;
+        } else if ($dayWeek > $firstDayWeek) {
             $dayWeek = $dayWeek - $firstDayWeek;
+        } else {
+            $dayWeek = 7 - $firstDayWeek;
         }
 
         //get days before this month
@@ -132,14 +136,12 @@ class Calendar implements CalendarInterface
         // month in question.
         $dayWeek = $end->dayOfWeek;
 
-        //sets the date to the first day of the week
-        if ($firstDayWeek > 0) {
-            $dayWeek = $dayWeek + $firstDayWeek;
-        }
-
         //get days before this month
-        if ($dayWeek < 6) {
+        if ($dayWeek < 6 && $firstDayWeek == 0) {
             $days = intval(6 - $dayWeek);
+            $end = $end->copy()->addDays($days);
+        } else if ($dayWeek > 0 && $firstDayWeek >= 1) {
+            $days = 7 - $dayWeek;
             $end = $end->copy()->addDays($days);
         }
 

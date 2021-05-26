@@ -11,9 +11,14 @@ class Calendar implements CalendarInterface
 
     public function __construct(int $month, int $year, int $firstDayWeek = 0)
     {
+        if ($firstDayWeek > 1 || $firstDayWeek < 0) {
+            $firstDayWeek = 0;
+        }
+        
         $this->week = new DaysWeek;
+        
         //set first day of week
-        if ($firstDayWeek > 0 && in_array($firstDayWeek, range(0,6))) {
+        if ($firstDayWeek == 1) {
             $this->week->setFirst($firstDayWeek);
         }
 
@@ -99,17 +104,16 @@ class Calendar implements CalendarInterface
         // What is the index value (0-6) of the first day of the
         // month in question.
         $dayWeek = $this->date->dayOfWeek;
-        
+
         if ($firstDayWeek > $dayWeek) {
-            $dayWeek = $dayWeek + (6 - $dayWeek);
+            $subDay = $dayWeek + (6 - $dayWeek);
         } else {
-            $dayWeek = $dayWeek - $firstDayWeek;
-        }
-        
+            $subDay = $dayWeek - $firstDayWeek;
+        }    
 
         //get days before this month
-        if ($dayWeek > 0) {
-            $start = $this->date->copy()->subDays($dayWeek);
+        if ($subDay > 0) {
+            $start = $this->date->copy()->subDays($subDay);
         } else {
             $start = $this->date;
         }

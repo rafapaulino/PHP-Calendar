@@ -99,15 +99,13 @@ class Calendar implements CalendarInterface
         // What is the index value (0-6) of the first day of the
         // month in question.
         $dayWeek = $this->date->dayOfWeek;
-
-        //sets the date to the first day of the week
-        if ($dayWeek == $firstDayWeek) {
-            $dayWeek = 0;
-        } else if ($dayWeek > $firstDayWeek) {
-            $dayWeek = $dayWeek - $firstDayWeek;
+        
+        if ($firstDayWeek > $dayWeek) {
+            $dayWeek = $dayWeek + (6 - $dayWeek);
         } else {
-            $dayWeek = 7 - $firstDayWeek;
+            $dayWeek = $dayWeek - $firstDayWeek;
         }
+        
 
         //get days before this month
         if ($dayWeek > 0) {
@@ -115,6 +113,7 @@ class Calendar implements CalendarInterface
         } else {
             $start = $this->date;
         }
+
         $this->start = $start->format('Y-m-d');
     }
 

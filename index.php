@@ -26,7 +26,7 @@ include 'vendor/autoload.php';
 use Calendar\Calendar;
 
 foreach (range(1,12) as $mes):
-    $calendar = new Calendar($mes,2021, 2);
+    $calendar = new Calendar($mes,2021, 1);
     $month = $calendar->getMonth();
     $year = $calendar->getYear();
     $days = $calendar->getDays();

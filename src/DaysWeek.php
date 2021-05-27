@@ -47,6 +47,7 @@ class DaysWeek
         $obj->letter = _("S");
         $obj->shortName = _("Sun");
         $obj->fullName = _("Sunday");
+        $obj->name = "Sunday";
         $obj->index = 0;
         return $obj;
     }
@@ -57,6 +58,7 @@ class DaysWeek
         $obj->letter = _("M");
         $obj->shortName = _("Mon");
         $obj->fullName = _("Monday");
+        $obj->name = "Monday";
         $obj->index = 1;
         return $obj;
     }
@@ -67,6 +69,7 @@ class DaysWeek
         $obj->letter = _("T");
         $obj->shortName = _("Tue");
         $obj->fullName = _("Tuesday");
+        $obj->name = "Tuesday";
         $obj->index = 2;
         return $obj;
     }
@@ -77,6 +80,7 @@ class DaysWeek
         $obj->letter = _("W");
         $obj->shortName = _("Wed");
         $obj->fullName = _("Wednesday");
+        $obj->name = "Wednesday";
         $obj->index = 3;
         return $obj;
     }
@@ -87,6 +91,7 @@ class DaysWeek
         $obj->letter = _("T");
         $obj->shortName = _("Thu");
         $obj->fullName = _("Thursday");
+        $obj->name = "Thursday";
         $obj->index = 4;
         return $obj;
     }
@@ -97,6 +102,7 @@ class DaysWeek
         $obj->letter = _("F");
         $obj->shortName = _("Fri");
         $obj->fullName = _("Friday");
+        $obj->name = "Friday";
         $obj->index = 5;
         return $obj;
     }
@@ -107,6 +113,7 @@ class DaysWeek
         $obj->letter = _("S");
         $obj->shortName = _("Sat");
         $obj->fullName = _("Saturday");
+        $obj->name = "Saturday";
         $obj->index = 6;
         return $obj;
     }

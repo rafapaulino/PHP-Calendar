@@ -19,6 +19,10 @@ td {
     margin: 2px 0;
     clear: both;
 }
+.today {
+    background: #000;
+    color: #FFF;
+}
 </style>
 <?php 
 include 'vendor/autoload.php';
@@ -26,7 +30,7 @@ include 'vendor/autoload.php';
 use Calendar\Calendar;
 
 foreach (range(1,12) as $mes):
-    $calendar = new Calendar($mes,2021, 0);
+    $calendar = new Calendar($mes,2021, 0, true);
     $month = $calendar->getMonth();
     $year = $calendar->getYear();
     $days = $calendar->getDays();
@@ -49,7 +53,7 @@ foreach (range(1,12) as $mes):
         ?>
             <?php if ($loop == 0): ?><tr><?php endif; ?>
             
-            <td class="<?php echo (($day->currentMonth)?'current':''); ?>"><?php echo $day->day; ?></td>
+            <td class="<?php echo (($day->currentMonth)?'current':''); ?> <?php echo (($day->carbon->isToday() && $day->currentMonth)?'today':''); ?>"><?php echo $day->day; ?></td>
 
             <?php if ($loop == 6): ?></tr><?php endif; ?> 
         <?php 

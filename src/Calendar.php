@@ -2,6 +2,7 @@
 
 namespace Calendar;
 
+use phpDocumentor\Reflection\Types\Boolean;
 use Tightenco\Collect\Support\Collection;
 use Carbon\Carbon;
 
@@ -9,12 +10,12 @@ class Calendar implements CalendarInterface
 {
     protected $date, $week, $month, $year, $start, $end, $days;
 
-    public function __construct(int $month, int $year, int $firstDayWeek = 0)
+    public function __construct(int $month, int $year, int $firstDayWeek = 0, bool $full = true)
     {    
         if (!in_array($firstDayWeek, range(0,6))) {  
             $firstDayWeek = 0;
         }
-        
+
         $this->week = new DaysWeek;
         
         //set first day of week
@@ -25,8 +26,8 @@ class Calendar implements CalendarInterface
         $this->setMonth($month);
         $this->setYear($year);
         $this->setDate();
-        $this->setStart($firstDayWeek);
-        $this->setEnd($firstDayWeek);
+        $this->setStart();
+        $this->setEnd($full);
         $this->setDays();
     }
 
@@ -99,12 +100,12 @@ class Calendar implements CalendarInterface
     /**
      * @param mixed $start
      */
-    public function setStart($firstDayWeek): void
+    public function setStart(): void
     {
         // What is the index value (0-6) of the first day of the
         // month in question.
         $dayWeek = $this->date->dayOfWeek;
-        $firstDayWeek = $this->week->getDays()[$firstDayWeek];
+        $firstDayWeek = $this->week->getDays()->first();
 
         if ($dayWeek == $firstDayWeek->index) {
             $start = $this->date;
@@ -126,20 +127,25 @@ class Calendar implements CalendarInterface
     /**
      * @param mixed $end
      */
-    public function setEnd($firstDayWeek): void
+    public function setEnd($full): void
     {
+        $lastDayWeek = $this->week->getDays()->last();
         $end = $this->date->endOfMonth();
         // What is the index value (0-6) of the last day of the
         // month in question.
         $dayWeek = $end->dayOfWeek;
 
-        //get days before this month
-        if ($dayWeek < 6 && $firstDayWeek == 0) {
-            $days = intval(6 - $dayWeek);
+        if ($full) {
+            $start = Carbon::createFromDate($this->getStart());
+            $difference = $start->diffInDays($end);
+            $days = 41 - $difference;
             $end = $end->copy()->addDays($days);
-        } else if ($dayWeek > 0 && $firstDayWeek >= 1) {
-            $days = 7 - $dayWeek;
-            $end = $end->copy()->addDays($days);
+        } else {
+            if ($dayWeek == $lastDayWeek->index) {
+                $end = $this->date;
+            } else {
+                $end = $this->date->copy()->next($lastDayWeek->name);
+            }
         }
 
         $this->end = $end->format('Y-m-d');
@@ -164,7 +170,7 @@ class Calendar implements CalendarInterface
         $period = Carbon::parse($start)->toPeriod($end, '1 day');
         foreach ($period as $date)
         {
-            $currentMonth = (($date->format('m') == $month->number) ? true:false);
+            $currentMonth = $date->format('m') == $month->number;
             $dayOfWeek = $this->setDayOfWeek($date->dayOfWeek);
 
             $day = new Day(

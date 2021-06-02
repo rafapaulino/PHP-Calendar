@@ -8,12 +8,22 @@ use Carbon\Carbon;
 
 class Calendar implements CalendarInterface
 {
+    const CALENDAR_MAX_DAYS = 41;
+
     protected $date, $week, $month, $year, $start, $end, $days;
 
     public function __construct(int $month, int $year, int $firstDayWeek = 0, bool $full = true)
     {    
+        if (!in_array($month, range(1,12))) {  
+            throw new \InvalidArgumentException('The month must have a value between 1 and 12');
+        }
+
+        if (!checkdate(1,1,$year)) {  
+            throw new \InvalidArgumentException('The year attribute needs a valid value');
+        }     
+        
         if (!in_array($firstDayWeek, range(0,6))) {  
-            $firstDayWeek = 0;
+            throw new \InvalidArgumentException('The first day of week must have a value between 0 and 6');
         }
 
         $this->week = new DaysWeek;
@@ -36,9 +46,6 @@ class Calendar implements CalendarInterface
         $months = new Months;
         $array_months = $months->getMonths()->all();
 
-        if (!in_array($month, range(1,12)))
-        $month = 1;
-
         $this->month = $array_months[$month];
     }
 
@@ -51,10 +58,7 @@ class Calendar implements CalendarInterface
     }
 
     protected function setYear(int $year): void
-    {
-        if (checkdate(1,1,$year))
-        $year = date("Y");
-        
+    {       
         $this->year = $year;
     }
 
@@ -138,7 +142,7 @@ class Calendar implements CalendarInterface
         if ($full) {
             $start = Carbon::createFromDate($this->getStart());
             $difference = $start->diffInDays($end);
-            $days = 41 - $difference;
+            $days = Calendar::CALENDAR_MAX_DAYS - $difference;
             $end = $end->copy()->addDays($days);
         } else {
             if ($dayWeek == $lastDayWeek->index) {
@@ -199,9 +203,6 @@ class Calendar implements CalendarInterface
 
     protected function setDayOfWeek(int $dayOfWeek)
     {
-        if (!in_array($dayOfWeek, range(0,6)))
-            $dayOfWeek = 0;
-
         foreach ($this->getDaysWeek() as $current)
         {
             if ($current->index == $dayOfWeek)

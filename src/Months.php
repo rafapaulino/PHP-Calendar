@@ -1,12 +1,18 @@
-<?php 
+<?php
 
 namespace Calendar;
 
 use Tightenco\Collect\Support\Collection;
 
+
+/**
+ * Class Months
+ * 
+ * @package Calendar
+ */
 class Months
 {
-    private $months;
+    protected $months;
 
     public function __construct()
     {
@@ -26,7 +32,7 @@ class Months
      *
      * @return  self
      */ 
-    private function setMonths()
+    protected function setMonths()
     {
         $this->months = new Collection([
             1 => $this->january(),
@@ -46,7 +52,7 @@ class Months
         return $this;
     }
 
-    private function january()
+    protected function january()
     {
         $obj = new \stdClass();
         $obj->letter = _("J");
@@ -56,7 +62,7 @@ class Months
         return $obj;
     }
 
-    private function february()
+    protected function february()
     {
         $obj = new \stdClass();
         $obj->letter = _("F");
@@ -66,7 +72,7 @@ class Months
         return $obj;
     }
 
-    private function march()
+    protected function march()
     {
         $obj = new \stdClass();
         $obj->letter = _("M");
@@ -76,7 +82,7 @@ class Months
         return $obj;
     }
 
-    private function april()
+    protected function april()
     {
         $obj = new \stdClass();
         $obj->letter = _("A");
@@ -86,7 +92,7 @@ class Months
         return $obj;
     }
 
-    private function may()
+    protected function may()
     {
         $obj = new \stdClass();
         $obj->letter = _("M");
@@ -96,7 +102,7 @@ class Months
         return $obj;
     }
 
-    private function june()
+    protected function june()
     {
         $obj = new \stdClass();
         $obj->letter = _("J");
@@ -106,7 +112,7 @@ class Months
         return $obj;
     }
 
-    private function july()
+    protected function july()
     {
         $obj = new \stdClass();
         $obj->letter = _("J");
@@ -116,7 +122,7 @@ class Months
         return $obj;
     }
 
-    private function august()
+    protected function august()
     {
         $obj = new \stdClass();
         $obj->letter = _("A");
@@ -126,7 +132,7 @@ class Months
         return $obj;
     }
 
-    private function september()
+    protected function september()
     {
         $obj = new \stdClass();
         $obj->letter = _("S");
@@ -136,7 +142,7 @@ class Months
         return $obj;
     }
 
-    private function october()
+    protected function october()
     {
         $obj = new \stdClass();
         $obj->letter = _("O");
@@ -146,7 +152,7 @@ class Months
         return $obj;
     }
 
-    private function november()
+    protected function november()
     {
         $obj = new \stdClass();
         $obj->letter = _("N");
@@ -156,7 +162,7 @@ class Months
         return $obj;
     }
 
-    private function december()
+    protected function december()
     {
         $obj = new \stdClass();
         $obj->letter = _("D");

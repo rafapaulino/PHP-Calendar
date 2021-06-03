@@ -14,15 +14,15 @@ class Calendar implements CalendarInterface
 
     public function __construct(int $month, int $year, int $firstDayWeek = 0, bool $full = true)
     {    
-        if (!in_array($month, range(1,12))) {  
+        if (!in_array($month, range(1, 12))) {  
             throw new \InvalidArgumentException('The month must have a value between 1 and 12');
         }
 
-        if (!checkdate(1,1,$year)) {  
+        if (!checkdate(1, 1, $year)) {  
             throw new \InvalidArgumentException('The year attribute needs a valid value');
         }     
         
-        if (!in_array($firstDayWeek, range(0,6))) {  
+        if (!in_array($firstDayWeek, range(0, 6))) {  
             throw new \InvalidArgumentException('The first day of week must have a value between 0 and 6');
         }
 
@@ -205,8 +205,9 @@ class Calendar implements CalendarInterface
     {
         foreach ($this->getDaysWeek() as $current)
         {
-            if ($current->index == $dayOfWeek)
+            if ($current->index == $dayOfWeek) {
                 return $current;
+            }
         }
     }
 }

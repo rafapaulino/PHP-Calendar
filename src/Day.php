@@ -4,10 +4,28 @@ namespace Calendar;
 
 use Carbon\Carbon;
 
+/**
+ * Class Day
+ *
+ * @package Calendar
+ */
 class Day
 {
+    /**
+     * @var
+     */
     protected $day;
 
+    /**
+     * Day constructor.
+     *
+     * @param int    $year
+     * @param $month
+     * @param int    $day
+     * @param $dayOfWeek
+     * @param Carbon $date
+     * @param bool   $currentMonth
+     */
     public function __construct(int $year, $month, int $day, $dayOfWeek, Carbon $date, $currentMonth = true)
     {
         $object = new \stdClass();
@@ -31,7 +49,7 @@ class Day
     }
 
     /**
-     * @param mixed $day
+     * @param  mixed $day
      * @return Day
      */
     public function setDay($day)

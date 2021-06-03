@@ -24,11 +24,12 @@ class DaysWeek
     /**
      * Set the value of days
      *
-     * @return  self
+     * @return self
      */ 
     private function setDays()
     {
-        $this->days = new Collection([
+        $this->days = new Collection(
+            [
             0 => $this->sunday(),
             1 => $this->monday(),
             2 => $this->tuesday(),
@@ -36,7 +37,8 @@ class DaysWeek
             4 => $this->thursday(),
             5 => $this->friday(),
             6 => $this->saturday()
-        ]);
+            ]
+        );
 
         return $this;
     }
@@ -123,7 +125,7 @@ class DaysWeek
         if ($key > 0) {
             $original = $this->days;
             $slice = $original->slice($key);
-            $remainder = $original->slice(0,$key);
+            $remainder = $original->slice(0, $key);
 
             $days = array();
 

@@ -1,4 +1,15 @@
 <?php
+/**
+ * This file is part of the Calendar package.
+ *
+ * PHP version 8
+ *
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
+ */
 
 namespace Calendar;
 
@@ -7,20 +18,38 @@ use Tightenco\Collect\Support\Collection;
 
 /**
  * Class Months
- * 
- * @package Calendar
+ *
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
  */
 class Months
 {
+    /**
+     * Variable with month collection
+     *
+     * @var
+     */
     protected $months;
 
+    /**
+     * Months constructor.
+     *
+     * @return self
+     */
     public function __construct()
     {
         $this->setMonths();
+
+        return $this;
     }
 
     /**
      * Get the value of months
+     *
+     * @return Collection
      */ 
     public function getMonths()
     {
@@ -30,11 +59,12 @@ class Months
     /**
      * Set the value of months
      *
-     * @return  self
+     * @return self
      */ 
     protected function setMonths()
     {
-        $this->months = new Collection([
+        $this->months = new Collection(
+            [
             1 => $this->january(),
             2 => $this->february(),
             3 => $this->march(),
@@ -47,11 +77,17 @@ class Months
             10 => $this->october(),
             11 => $this->november(),
             12 => $this->december()
-        ]);
+            ]
+        );
 
         return $this;
     }
 
+    /**
+     * Format january month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function january()
     {
         $obj = new \stdClass();
@@ -62,6 +98,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format february month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function february()
     {
         $obj = new \stdClass();
@@ -72,6 +113,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format march month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function march()
     {
         $obj = new \stdClass();
@@ -82,6 +128,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format april month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function april()
     {
         $obj = new \stdClass();
@@ -92,6 +143,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format may month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function may()
     {
         $obj = new \stdClass();
@@ -102,6 +158,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format june month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function june()
     {
         $obj = new \stdClass();
@@ -112,6 +173,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format july month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function july()
     {
         $obj = new \stdClass();
@@ -122,6 +188,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format august month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function august()
     {
         $obj = new \stdClass();
@@ -132,6 +203,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format september month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function september()
     {
         $obj = new \stdClass();
@@ -142,6 +218,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format october month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function october()
     {
         $obj = new \stdClass();
@@ -152,6 +233,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format november month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function november()
     {
         $obj = new \stdClass();
@@ -162,6 +248,11 @@ class Months
         return $obj;
     }
 
+    /**
+     * Format december month in stdClass
+     *
+     * @return \stdClass
+     */
     protected function december()
     {
         $obj = new \stdClass();

@@ -1,20 +1,54 @@
-<?php 
+<?php
+/**
+ * This file is part of the Calendar package.
+ *
+ * PHP version 8
+ *
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
+ */
 
 namespace Calendar;
 
 use Tightenco\Collect\Support\Collection;
 
+/**
+ * Class DaysWeek
+ *
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
+ */
 class DaysWeek
 {
-    private $days;
+    /**
+     * Variable with days of week collection
+     *
+     * @var
+     */
+    protected $days;
 
+    /**
+     * DaysWeek constructor.
+     *
+     * @return self
+     */
     public function __construct()
     {
         $this->setDays();
+
+        return $this;
     }
 
     /**
      * Get the value of days
+     *
+     * @return Collection
      */ 
     public function getDays()
     {
@@ -26,7 +60,7 @@ class DaysWeek
      *
      * @return self
      */ 
-    private function setDays()
+    protected function setDays()
     {
         $this->days = new Collection(
             [
@@ -43,7 +77,12 @@ class DaysWeek
         return $this;
     }
 
-    private function sunday()
+    /**
+     * Format sunday in stdClass
+     *
+     * @return \stdClass
+     */
+    protected function sunday()
     {
         $obj = new \stdClass();
         $obj->letter = _("S");
@@ -54,7 +93,12 @@ class DaysWeek
         return $obj;
     }
 
-    private function monday()
+    /**
+     * Format monday in stdClass
+     *
+     * @return \stdClass
+     */
+    protected function monday()
     {
         $obj = new \stdClass();
         $obj->letter = _("M");
@@ -65,7 +109,12 @@ class DaysWeek
         return $obj;
     }
 
-    private function tuesday()
+    /**
+     * Format tuesday in stdClass
+     *
+     * @return \stdClass
+     */
+    protected function tuesday()
     {
         $obj = new \stdClass();
         $obj->letter = _("T");
@@ -76,7 +125,12 @@ class DaysWeek
         return $obj;
     }
 
-    private function wednesday()
+    /**
+     * Format wednesday in stdClass
+     *
+     * @return \stdClass
+     */
+    protected function wednesday()
     {
         $obj = new \stdClass();
         $obj->letter = _("W");
@@ -87,7 +141,12 @@ class DaysWeek
         return $obj;
     }
 
-    private function thursday()
+    /**
+     * Format thursday in stdClass
+     *
+     * @return \stdClass
+     */
+    protected function thursday()
     {
         $obj = new \stdClass();
         $obj->letter = _("T");
@@ -98,7 +157,12 @@ class DaysWeek
         return $obj;
     }
 
-    private function friday()
+    /**
+     * Format friday in stdClass
+     *
+     * @return \stdClass
+     */
+    protected function friday()
     {
         $obj = new \stdClass();
         $obj->letter = _("F");
@@ -109,7 +173,12 @@ class DaysWeek
         return $obj;
     }
 
-    private function saturday()
+    /**
+     * Format saturday in stdClass
+     *
+     * @return \stdClass
+     */
+    protected function saturday()
     {
         $obj = new \stdClass();
         $obj->letter = _("S");
@@ -120,7 +189,14 @@ class DaysWeek
         return $obj;
     }
 
-    public function setFirst(int $key = 1)
+    /**
+     * Set the first day of week between 0-6
+     *
+     * @param int $key first day of week
+     *
+     * @return $this
+     */
+    public function setFirst(int $key = 1): DaysWeek
     {
         if ($key > 0) {
             $original = $this->days;
@@ -129,13 +205,11 @@ class DaysWeek
 
             $days = array();
 
-            foreach($slice->all() as $key => $value)
-            {
+            foreach ($slice->all() as $key => $value) {
                 $days[$key] = $value;
             }
 
-            foreach($remainder->all() as $key => $value)
-            {
+            foreach ($remainder->all() as $key => $value) {
                 $days[$key] = $value;
             }
 

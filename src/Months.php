@@ -13,6 +13,7 @@
 
 namespace Calendar;
 
+use stdClass;
 use Tightenco\Collect\Support\Collection;
 
 
@@ -51,7 +52,7 @@ class Months
      *
      * @return Collection
      */ 
-    public function getMonths()
+    public function getMonths(): Collection
     {
         return $this->months;
     }
@@ -61,7 +62,7 @@ class Months
      *
      * @return self
      */ 
-    protected function setMonths()
+    protected function setMonths(): Months
     {
         $this->months = new Collection(
             [
@@ -86,11 +87,11 @@ class Months
     /**
      * Format january month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function january()
+    protected function january(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("J");
         $obj->shortName = _("Jan");
         $obj->fullName = _("January");
@@ -101,11 +102,11 @@ class Months
     /**
      * Format february month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function february()
+    protected function february(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("F");
         $obj->shortName = _("Feb");
         $obj->fullName = _("February");
@@ -116,11 +117,11 @@ class Months
     /**
      * Format march month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function march()
+    protected function march(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("M");
         $obj->shortName = _("Mar");
         $obj->fullName = _("March");
@@ -131,11 +132,11 @@ class Months
     /**
      * Format april month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function april()
+    protected function april(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("A");
         $obj->shortName = _("Apr");
         $obj->fullName = _("April");
@@ -146,11 +147,11 @@ class Months
     /**
      * Format may month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function may()
+    protected function may(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("M");
         $obj->shortName = _("May");
         $obj->fullName = _("May");
@@ -161,11 +162,11 @@ class Months
     /**
      * Format june month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function june()
+    protected function june(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("J");
         $obj->shortName = _("Jun");
         $obj->fullName = _("June");
@@ -176,11 +177,11 @@ class Months
     /**
      * Format july month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function july()
+    protected function july(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("J");
         $obj->shortName = _("Jul");
         $obj->fullName = _("July");
@@ -191,11 +192,11 @@ class Months
     /**
      * Format august month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function august()
+    protected function august(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("A");
         $obj->shortName = _("Aug");
         $obj->fullName = _("August");
@@ -206,11 +207,11 @@ class Months
     /**
      * Format september month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function september()
+    protected function september(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("S");
         $obj->shortName = _("Sep");
         $obj->fullName = _("September");
@@ -221,11 +222,11 @@ class Months
     /**
      * Format october month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function october()
+    protected function october(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("O");
         $obj->shortName = _("Oct");
         $obj->fullName = _("October");
@@ -236,11 +237,11 @@ class Months
     /**
      * Format november month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function november()
+    protected function november(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("N");
         $obj->shortName = _("Nov");
         $obj->fullName = _("November");
@@ -251,11 +252,11 @@ class Months
     /**
      * Format december month in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function december()
+    protected function december(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("D");
         $obj->shortName = _("Dec");
         $obj->fullName = _("December");

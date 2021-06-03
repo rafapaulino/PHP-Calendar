@@ -13,6 +13,7 @@
 
 namespace Calendar;
 
+use stdClass;
 use Tightenco\Collect\Support\Collection;
 
 /**
@@ -50,7 +51,7 @@ class DaysWeek
      *
      * @return Collection
      */ 
-    public function getDays()
+    public function getDays(): Collection
     {
         return $this->days;
     }
@@ -60,7 +61,7 @@ class DaysWeek
      *
      * @return self
      */ 
-    protected function setDays()
+    protected function setDays(): DaysWeek
     {
         $this->days = new Collection(
             [
@@ -80,11 +81,11 @@ class DaysWeek
     /**
      * Format sunday in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function sunday()
+    protected function sunday(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("S");
         $obj->shortName = _("Sun");
         $obj->fullName = _("Sunday");
@@ -96,11 +97,11 @@ class DaysWeek
     /**
      * Format monday in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function monday()
+    protected function monday(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("M");
         $obj->shortName = _("Mon");
         $obj->fullName = _("Monday");
@@ -112,11 +113,11 @@ class DaysWeek
     /**
      * Format tuesday in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function tuesday()
+    protected function tuesday(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("T");
         $obj->shortName = _("Tue");
         $obj->fullName = _("Tuesday");
@@ -128,11 +129,11 @@ class DaysWeek
     /**
      * Format wednesday in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function wednesday()
+    protected function wednesday(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("W");
         $obj->shortName = _("Wed");
         $obj->fullName = _("Wednesday");
@@ -144,11 +145,11 @@ class DaysWeek
     /**
      * Format thursday in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function thursday()
+    protected function thursday(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("T");
         $obj->shortName = _("Thu");
         $obj->fullName = _("Thursday");
@@ -160,11 +161,11 @@ class DaysWeek
     /**
      * Format friday in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function friday()
+    protected function friday(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("F");
         $obj->shortName = _("Fri");
         $obj->fullName = _("Friday");
@@ -176,11 +177,11 @@ class DaysWeek
     /**
      * Format saturday in stdClass
      *
-     * @return \stdClass
+     * @return stdClass
      */
-    protected function saturday()
+    protected function saturday(): stdClass
     {
-        $obj = new \stdClass();
+        $obj = new stdClass();
         $obj->letter = _("S");
         $obj->shortName = _("Sat");
         $obj->fullName = _("Saturday");
@@ -214,8 +215,7 @@ class DaysWeek
             }
 
             $this->days = new Collection($days);
-
-            return $this;
         }
+        return $this;
     }
 }

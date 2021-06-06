@@ -13,6 +13,7 @@
 
 namespace Calendar;
 
+use JetBrains\PhpStorm\Pure;
 use stdClass;
 use Tightenco\Collect\Support\Collection;
 
@@ -30,9 +31,9 @@ class DaysWeek
     /**
      * Variable with days of week collection
      *
-     * @var
+     * @var Collection
      */
-    protected $days;
+    protected Collection $days;
 
     /**
      * DaysWeek constructor.
@@ -83,7 +84,7 @@ class DaysWeek
      *
      * @return stdClass
      */
-    protected function sunday(): stdClass
+    #[Pure] protected function sunday(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("S");
@@ -99,7 +100,7 @@ class DaysWeek
      *
      * @return stdClass
      */
-    protected function monday(): stdClass
+    #[Pure] protected function monday(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("M");
@@ -115,7 +116,7 @@ class DaysWeek
      *
      * @return stdClass
      */
-    protected function tuesday(): stdClass
+    #[Pure] protected function tuesday(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("T");
@@ -131,7 +132,7 @@ class DaysWeek
      *
      * @return stdClass
      */
-    protected function wednesday(): stdClass
+    #[Pure] protected function wednesday(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("W");
@@ -147,7 +148,7 @@ class DaysWeek
      *
      * @return stdClass
      */
-    protected function thursday(): stdClass
+    #[Pure] protected function thursday(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("T");
@@ -163,7 +164,7 @@ class DaysWeek
      *
      * @return stdClass
      */
-    protected function friday(): stdClass
+    #[Pure] protected function friday(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("F");
@@ -179,7 +180,7 @@ class DaysWeek
      *
      * @return stdClass
      */
-    protected function saturday(): stdClass
+    #[Pure] protected function saturday(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("S");

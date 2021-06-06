@@ -1,34 +1,51 @@
 <?php
+/**
+ * This file is part of the Calendar package.
+ *
+ * PHP version 8
+ *
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
+ */
 
 namespace Calendar;
 
-use Carbon\Carbon;
+use stdClass;
 
 /**
  * Class Day
  *
- * @package Calendar
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
  */
 class Day
 {
     /**
+     * Variable with object properties for day
+     *
      * @var
      */
-    protected $day;
+    protected mixed $day;
 
     /**
      * Day constructor.
      *
-     * @param int    $year
-     * @param $month
-     * @param int    $day
-     * @param $dayOfWeek
-     * @param Carbon $date
-     * @param bool   $currentMonth
+     * @param int      $year         year for month
+     * @param stdClass $month        of this day
+     * @param int      $day          day number
+     * @param stdClass $dayOfWeek    day of week
+     * @param mixed    $date         object date from carbon
+     * @param bool     $currentMonth boolean for current month
      */
-    public function __construct(int $year, $month, int $day, $dayOfWeek, Carbon $date, $currentMonth = true)
+    public function __construct(int $year, stdClass $month, int $day, stdClass $dayOfWeek, mixed $date, bool $currentMonth = true)
     {
-        $object = new \stdClass();
+        $object = new stdClass();
         $object->year = $year;
         $object->month = $month;
         $object->day = $day;
@@ -41,18 +58,23 @@ class Day
     }
 
     /**
+     * Return day object for calendar array
+     *
      * @return mixed
      */
-    public function getDay()
+    public function getDay(): mixed
     {
         return $this->day;
     }
 
     /**
-     * @param  mixed $day
+     * Create day object for calendar
+     * 
+     * @param mixed $day day number in calendar
+     * 
      * @return Day
      */
-    public function setDay($day)
+    public function setDay(mixed $day): static
     {
         $this->day = $day;
         return $this;

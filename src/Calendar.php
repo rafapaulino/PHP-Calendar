@@ -1,29 +1,105 @@
-<?php 
+<?php
+/**
+ * This file is part of the Calendar package.
+ *
+ * PHP version 8
+ *
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
+ */
 
 namespace Calendar;
 
-use phpDocumentor\Reflection\Types\Boolean;
+use InvalidArgumentException;
+use JetBrains\PhpStorm\Pure;
+use stdClass;
 use Tightenco\Collect\Support\Collection;
 use Carbon\Carbon;
 
+/**
+ * Class Calendar
+ *
+ * @category PHP
+ * @package  Calendar
+ * @author   Rafael Paulino <rafaclasses@gmail.com>
+ * @license  https://github.com/rafapaulino/PHP-Calendar/LICENSE BSD Licence
+ * @link     https://github.com/rafapaulino/PHP-Calendar
+ */
 class Calendar implements CalendarInterface
 {
+    /**
+     * Max days for subtract in calendar when number of days is set full
+     *
+     * @const int
+     */
     const CALENDAR_MAX_DAYS = 41;
 
-    protected $date, $week, $month, $year, $start, $end, $days;
+    /**
+     * Return a collection with days in calendar
+     *
+     * @var Collection
+     */
+    protected mixed $days;
+    /**
+     * The last day in the month
+     *
+     * @var mixed
+     */
+    protected mixed $end;
+    /**
+     * The first day in the month
+     *
+     * @var mixed
+     */
+    protected mixed $start;
+    /**
+     * The year in calendar
+     *
+     * @var mixed
+     */
+    protected mixed $year;
+    /**
+     * The month in calendar
+     *
+     * @var mixed
+     */
+    protected mixed $month;
+    /**
+     * The days of week in calendar
+     *
+     * @var DaysWeek
+     */
+    protected DaysWeek $week;
+    /**
+     * Carbon object date for calendar construction
+     *
+     * @var mixed
+     */
+    protected mixed $date;
 
+    /**
+     * Calendar constructor.
+     *
+     * @param int  $month        month for this calendar
+     * @param int  $year         year for the calendar
+     * @param int  $firstDayWeek first day of week (0-6)
+     * @param bool $full         show 42 days in calendar or show only days for complete this
+     */
     public function __construct(int $month, int $year, int $firstDayWeek = 0, bool $full = true)
     {    
         if (!in_array($month, range(1, 12))) {  
-            throw new \InvalidArgumentException('The month must have a value between 1 and 12');
+            throw new InvalidArgumentException('The month must have a value between 1 and 12');
         }
 
         if (!checkdate(1, 1, $year)) {  
-            throw new \InvalidArgumentException('The year attribute needs a valid value');
+            throw new InvalidArgumentException('The year attribute needs a valid value');
         }     
         
         if (!in_array($firstDayWeek, range(0, 6))) {  
-            throw new \InvalidArgumentException('The first day of week must have a value between 0 and 6');
+            throw new InvalidArgumentException('The first day of week must have a value between 0 and 6');
         }
 
         $this->week = new DaysWeek;
@@ -41,6 +117,13 @@ class Calendar implements CalendarInterface
         $this->setDays();
     }
 
+    /**
+     * Set month object for month number
+     *
+     * @param int $month actual month for calendar
+     *
+     * @return void
+     */
     protected function setMonth(int $month): void
     {
         $months = new Months;
@@ -50,34 +133,52 @@ class Calendar implements CalendarInterface
     }
 
     /**
-     * @return mixed
+     * Return month object for actual month in calendar
+     *
+     * @return stdClass
      */
-    public function getMonth()
+    public function getMonth(): stdClass
     {
         return $this->month;
     }
 
+    /**
+     * Set the year in calendar
+     *
+     * @param int $year the actual calendar year
+     *
+     * @return void
+     */
     protected function setYear(int $year): void
     {       
         $this->year = $year;
     }
 
     /**
-     * @return mixed
+     * Return year for calendar
+     *
+     * @return int
      */
-    public function getYear()
+    public function getYear(): int
     {
         return $this->year;
     }
 
     /**
-     * @return mixed
+     * Return a carbon date object
+     *
+     * @return Carbon
      */
-    public function getDate()
+    public function getDate(): Carbon
     {
         return $this->date;
     }
 
+    /**
+     * Create a carbon date object
+     *
+     * @return void
+     */
     protected function setDate(): void
     {
         $year = $this->getYear();
@@ -86,23 +187,29 @@ class Calendar implements CalendarInterface
     }
 
     /**
-     * @return mixed
+     * Get an array with all days of week in std object
+     *
+     * @return array
      */
-    public function getDaysWeek()
+    #[Pure] public function getDaysWeek(): array
     {
         return $this->week->getDays()->all();
     }
 
     /**
+     * Get the first day of calendar
+     *
      * @return mixed
      */
-    public function getStart()
+    public function getStart(): mixed
     {
         return $this->start;
     }
 
     /**
-     * @param mixed $start
+     * Create the first day in calendar
+     *
+     * @return void
      */
     public function setStart(): void
     {
@@ -121,17 +228,23 @@ class Calendar implements CalendarInterface
     }
 
     /**
+     * Return the last day in calendar
+     *
      * @return mixed
      */
-    public function getEnd()
+    public function getEnd(): mixed
     {
         return $this->end;
     }
 
     /**
-     * @param mixed $end
+     * Create the last day in calendar
+     *
+     * @param $full boolean inform if calendar has 42 days or not
+     *
+     * @return void
      */
-    public function setEnd($full): void
+    public function setEnd(bool $full): void
     {
         $lastDayWeek = $this->week->getDays()->last();
         $end = $this->date->endOfMonth();
@@ -156,6 +269,11 @@ class Calendar implements CalendarInterface
     }
 
 
+    /**
+     * Create a collection of days for calendar
+     *
+     * @return void
+     */
     public function setDays(): void
     {
         //get first day in calendar
@@ -172,8 +290,8 @@ class Calendar implements CalendarInterface
 
         //create period
         $period = Carbon::parse($start)->toPeriod($end, '1 day');
-        foreach ($period as $date)
-        {
+        
+        foreach ($period as $date) {
             $currentMonth = $date->format('m') == $month->number;
             $dayOfWeek = $this->setDayOfWeek($date->dayOfWeek);
 
@@ -194,20 +312,30 @@ class Calendar implements CalendarInterface
     }
 
     /**
-     * @return mixed
+     * Return a collection of days for calendar
+     * 
+     * @return Collection
      */
-    public function getDays()
+    public function getDays(): Collection
     {
         return $this->days;
     }
 
-    protected function setDayOfWeek(int $dayOfWeek)
+    /**
+     * Set the first day of week in calendar
+     *
+     * @param int $dayOfWeek
+     * 
+     * @return mixed
+     */
+    #[Pure] protected function setDayOfWeek(int $dayOfWeek): mixed
     {
-        foreach ($this->getDaysWeek() as $current)
-        {
+        foreach ($this->getDaysWeek() as $current) {
             if ($current->index == $dayOfWeek) {
                 return $current;
             }
         }
+
+        return 0;
     }
 }

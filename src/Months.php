@@ -13,6 +13,7 @@
 
 namespace Calendar;
 
+use JetBrains\PhpStorm\Pure;
 use stdClass;
 use Tightenco\Collect\Support\Collection;
 
@@ -31,9 +32,9 @@ class Months
     /**
      * Variable with month collection
      *
-     * @var
+     * @var Collection
      */
-    protected $months;
+    protected Collection $months;
 
     /**
      * Months constructor.
@@ -89,7 +90,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function january(): stdClass
+    #[Pure] protected function january(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("J");
@@ -104,7 +105,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function february(): stdClass
+    #[Pure] protected function february(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("F");
@@ -119,7 +120,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function march(): stdClass
+    #[Pure] protected function march(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("M");
@@ -134,7 +135,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function april(): stdClass
+    #[Pure] protected function april(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("A");
@@ -149,7 +150,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function may(): stdClass
+    #[Pure] protected function may(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("M");
@@ -164,7 +165,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function june(): stdClass
+    #[Pure] protected function june(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("J");
@@ -179,7 +180,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function july(): stdClass
+    #[Pure] protected function july(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("J");
@@ -194,7 +195,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function august(): stdClass
+    #[Pure] protected function august(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("A");
@@ -209,7 +210,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function september(): stdClass
+    #[Pure] protected function september(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("S");
@@ -224,7 +225,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function october(): stdClass
+    #[Pure] protected function october(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("O");
@@ -239,7 +240,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function november(): stdClass
+    #[Pure] protected function november(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("N");
@@ -254,7 +255,7 @@ class Months
      *
      * @return stdClass
      */
-    protected function december(): stdClass
+    #[Pure] protected function december(): stdClass
     {
         $obj = new stdClass();
         $obj->letter = _("D");

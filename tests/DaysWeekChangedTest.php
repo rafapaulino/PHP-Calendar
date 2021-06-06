@@ -1,18 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Calendar;
-
 use PHPUnit\Framework\TestCase;
 use Calendar\DaysWeek;
 
 class DaysWeekChangedTest extends TestCase 
 {
-    protected $days;
+    protected DaysWeek $days;
 
     protected function setUp() :void
     {
         $this->days = new DaysWeek;
-        $this->days->setFirst(1);
+        $this->days->setFirst(); //if you set default param is 1
     }
 
     public function testInstance() :void

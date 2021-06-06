@@ -1,13 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Calendar;
-
 use PHPUnit\Framework\TestCase;
 use Calendar\DaysWeek;
 
 class DaysWeekTest extends TestCase 
 {
-    protected $days;
+    protected DaysWeek $days;
 
     protected function setUp() :void
     {

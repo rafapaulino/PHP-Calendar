@@ -13,6 +13,7 @@
 
 namespace Calendar;
 
+use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use stdClass;
 use Tightenco\Collect\Support\Collection;
@@ -200,6 +201,10 @@ class DaysWeek
      */
     public function setFirst(int $key = 1): DaysWeek
     {
+        if (!in_array($key, range(0, 6))) {
+            throw new InvalidArgumentException('The first day of week must have a value between 0 and 6');
+        }
+
         if ($key > 0) {
             $original = $this->days;
             $slice = $original->slice($key);

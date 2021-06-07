@@ -14,7 +14,6 @@
 namespace Calendar;
 
 use stdClass;
-use Tightenco\Collect\Support\Collection;
 
 /**
  * Class Day

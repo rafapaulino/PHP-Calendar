@@ -13,6 +13,13 @@ class DaysWeekChangedTest extends TestCase
         $this->days->setFirst(); //if you set default param is 1
     }
 
+    public function testException() :void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $days = new DaysWeek;
+        $days->setFirst(9);
+    }
+
     public function testInstance() :void
     {
         $this->assertInstanceOf(DaysWeek::class, $this->days);

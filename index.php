@@ -35,6 +35,44 @@ foreach (range(1,12) as $mes):
     $year = $calendar->getYear();
     $days = $calendar->getDays();
     $daysWeek = $calendar->getDaysWeek();
+
+    //setar os eventos
+
+    //setar a agenda do dia
+
+/*
+ *
+ *  talvez a solução seja passar os eventos com o setDays($eventos,$agenda)
+ *  assim você criaria os eventos dentro do loop de dias somente umas vez
+ *  passar um array collection com o dia
+ * https://www.calendarr.com/brasil/
+ * https://www.calendarioonline.com.br/calendario-2021/
+ * talvez criar um array ou uma classe onde você possa pegar os eventos e fazer um loop neles
+ * ou você pode extender a classe de calendário e criar a classe de eventos
+ *
+ * para resolver o problema dos eventos
+ * https://codeshack.io/event-calendar-php/
+ *
+ * $calendar = new Calendar(1,2021)
+ * ->setFirstDayWeek(0)
+ * ->addEvent('Aniversário de São Paulo',25)
+ * ->addEvent('Confraternização Universal',1)
+ * ->addEvent('Suruba dos ninjas da folha',10,13)
+ * ->setDays(true);
+ *
+ *  $month = $calendar->getMonth();
+    $year = $calendar->getYear();
+    $days = $calendar->getDays();
+    $daysWeek = $calendar->getDaysWeek();
+    $events = $calendar->getEvents();
+ *
+ * versão 1 - apenas o caledário 
+ * versão 2 - adiciona os eventos 
+ * versão 3 - adiciona a agenda para o dia com os horários 
+ * versão 4 - pega a visualização por semana https://fullcalendar.io/demos
+ * 
+ * a classe que add os eventos e agenda extende do calendário
+ */
 ?>
 <table>
     <caption><?php echo $month->fullName; ?> <?php echo $year; ?></caption>

@@ -14,6 +14,7 @@
 namespace Calendar;
 
 use stdClass;
+use Tightenco\Collect\Support\Collection;
 
 /**
  * Class Day
@@ -29,9 +30,9 @@ class Day
     /**
      * Variable with object properties for day
      *
-     * @var
+     * @var stdClass
      */
-    protected mixed $day;
+    protected stdClass $day;
 
     /**
      * Day constructor.
@@ -60,9 +61,9 @@ class Day
     /**
      * Return day object for calendar array
      *
-     * @return mixed
+     * @return stdClass
      */
-    public function getDay(): mixed
+    public function getDay(): stdClass
     {
         return $this->day;
     }
@@ -70,11 +71,11 @@ class Day
     /**
      * Create day object for calendar
      * 
-     * @param mixed $day day number in calendar
+     * @param stdClass $day day object in calendar
      * 
      * @return Day
      */
-    public function setDay(mixed $day): static
+    public function setDay(stdClass $day): Day
     {
         $this->day = $day;
         return $this;

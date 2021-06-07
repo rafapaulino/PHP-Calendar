@@ -12,7 +12,7 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "php": "^7.2 || ^8.0",
+        "php": "^8.0",
         "tightenco/collect": "^8.19",
         "nesbot/carbon": "^2.43"
     },

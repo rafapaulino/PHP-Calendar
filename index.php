@@ -70,6 +70,7 @@ foreach (range(1,12) as $mes):
  * versão 2 - adiciona os eventos 
  * versão 3 - adiciona a agenda para o dia com os horários 
  * versão 4 - pega a visualização por semana https://fullcalendar.io/demos
+ * versão 5 - calendário do ano com eventos
  * 
  * a classe que add os eventos e agenda extende do calendário
  */

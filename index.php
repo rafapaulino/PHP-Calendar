@@ -36,6 +36,7 @@ foreach (range(1,12) as $mes):
     $days = $calendar->getDays();
     $daysWeek = $calendar->getDaysWeek();
 
+
     //setar os eventos
 
     //setar a agenda do dia

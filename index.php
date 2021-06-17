@@ -28,6 +28,7 @@ td {
 include 'vendor/autoload.php';
 
 use Calendar\Calendar;
+use Calendar\Events;
 
 foreach (range(1,12) as $mes):
     $calendar = new Calendar($mes,2021, 0, true);
@@ -110,3 +111,10 @@ foreach (range(1,12) as $mes):
 
     endforeach; 
 ?>
+
+<?php
+$events = new Events(6,2021);
+$events->addEvent("Festa","2021-06-17",4);
+$events->addEvent("Futebol","2021-06-17",1);
+$events->addEvent("Saída","2021-06-17",2);
+

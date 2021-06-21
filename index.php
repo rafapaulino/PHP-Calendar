@@ -23,6 +23,11 @@ td {
     background: #000;
     color: #FFF;
 }
+
+.events {
+    background: #0c0cea;
+    color: #FFF;
+}
 </style>
 <?php 
 include 'vendor/autoload.php';
@@ -111,10 +116,46 @@ foreach (range(1,12) as $mes):
 
     endforeach; 
 ?>
-
+<hr>
 <?php
 $events = new Events(6,2021);
 $events->addEvent("Festa","2021-06-17",4);
 $events->addEvent("Futebol","2021-06-17",1);
 $events->addEvent("Saída","2021-06-17",2);
+$events->addEvent("Quase um mês para a saída","2021-06-26",5);
+$month = $events->getMonth();
+$year = $events->getYear();
+$days = $events->getDays();
+$daysWeek = $events->getDaysWeek();
+?>
+<table>
+    <caption><?php echo $month->fullName; ?> <?php echo $year; ?></caption>
+    <thead>
+    <tr>
+        <?php foreach($daysWeek as $week): ?>
+            <th><?php echo $week->letter; ?></th>
+        <?php endforeach; ?>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    $loop = 0;
+    foreach($days as $day):
 
+        ?>
+        <?php if ($loop == 0): ?><tr><?php endif; ?>
+
+        <td title="<?php echo ((count($day->events) > 0)? implode(", ",$day->events):''); ?>" class="<?php echo (($day->currentMonth)?'current':''); ?> <?php echo (($day->carbon->isToday() && $day->currentMonth)?'today':''); ?> <?php echo ((count($day->events) > 0)? 'events':''); ?>">
+            <?php echo $day->day; ?>
+        </td>
+
+        <?php if ($loop == 6): ?></tr><?php endif; ?>
+        <?php
+        $loop++;
+
+        if ($loop > 6) $loop = 0;
+
+    endforeach;
+    ?>
+    </tbody>
+</table>

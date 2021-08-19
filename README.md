@@ -153,7 +153,7 @@ $daysWeek = $events->getDaysWeek();
 
 ### Features
 
-- `v1.1.3` I added the events to the calendar.
+- `v1.1.4` I added the events to the calendar.
 - `v1.0.0` Package creation and unit tests.
 
 

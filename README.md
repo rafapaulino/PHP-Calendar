@@ -7,13 +7,9 @@
 </div>
 
 [![Latest Stable Version](https://poser.pugx.org/php-pagination/php-pagination/v/stable)](https://packagist.org/packages/php-pagination/php-pagination)
-
 [![Total Downloads](https://poser.pugx.org/php-pagination/php-pagination/downloads)](https://packagist.org/packages/php-pagination/php-pagination)
-
 [![Latest Unstable Version](https://poser.pugx.org/php-pagination/php-pagination/v/unstable)](https://packagist.org/packages/php-pagination/php-pagination)
-
 [![Monthly Downloads](https://poser.pugx.org/php-pagination/php-pagination/d/monthly)](https://packagist.org/packages/php-pagination/php-pagination)
-
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SN4SZRSL5HPZU)
 
 ------
@@ -157,7 +153,7 @@ $daysWeek = $events->getDaysWeek();
 
 ### Features
 
-- `v1.1.0` I added the events to the calendar.
+- `v1.1.2` I added the events to the calendar.
 - `v1.0.0` Package creation and unit tests.
 
 

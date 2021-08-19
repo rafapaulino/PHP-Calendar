@@ -28,7 +28,7 @@ PHP Calendar is a php package that generates a calendar from the month and year 
 - [Composer](https://getcomposer.org/)
 
 ## 2. Installation
-- composer require php-calendar/php-calendar
+- composer require rafapaulino/calendar
 
 ## 3. Documentation
 [You can access the documentation for this package by clicking here](https://php-calendar.docsforge.com/)
@@ -153,7 +153,7 @@ $daysWeek = $events->getDaysWeek();
 
 ### Features
 
-- `v1.1.2` I added the events to the calendar.
+- `v1.1.3` I added the events to the calendar.
 - `v1.0.0` Package creation and unit tests.
 
 

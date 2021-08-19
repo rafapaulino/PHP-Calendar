@@ -6,10 +6,10 @@
     </p>
 </div>
 
-[![Latest Stable Version](https://poser.pugx.org/php-pagination/php-pagination/v/stable)](https://packagist.org/packages/php-pagination/php-pagination)
-[![Total Downloads](https://poser.pugx.org/php-pagination/php-pagination/downloads)](https://packagist.org/packages/php-pagination/php-pagination)
-[![Latest Unstable Version](https://poser.pugx.org/php-pagination/php-pagination/v/unstable)](https://packagist.org/packages/php-pagination/php-pagination)
-[![Monthly Downloads](https://poser.pugx.org/php-pagination/php-pagination/d/monthly)](https://packagist.org/packages/php-pagination/php-pagination)
+[![Latest Stable Version](http://poser.pugx.org/rafapaulino/calendar/v)](https://packagist.org/packages/rafapaulino/calendar) 
+[![Total Downloads](http://poser.pugx.org/rafapaulino/calendar/downloads)](https://packagist.org/packages/rafapaulino/calendar) 
+[![Latest Unstable Version](http://poser.pugx.org/rafapaulino/calendar/v/unstable)](https://packagist.org/packages/rafapaulino/calendar) 
+[![License](http://poser.pugx.org/rafapaulino/calendar/license)](https://packagist.org/packages/rafapaulino/calendar)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SN4SZRSL5HPZU)
 
 ------

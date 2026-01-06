@@ -24,7 +24,7 @@ PHP Calendar is a php package that generates a calendar from the month and year 
 
 ## 1. Requirements
 
-- [PHP 8](https://www.php.net/releases/8.0/en.php)
+- [PHP 8.2+](https://www.php.net/releases/8.2/en.php)
 - [Composer](https://getcomposer.org/)
 
 ## 2. Installation
@@ -109,10 +109,10 @@ include 'vendor/autoload.php';
 use Calendar\Calendar;
 use Calendar\Events;
 
-$calendar = new Calendar(1,2021, 0, true);
-$events = new Events(1,2021);
-$events->addEvent("My brother's birthday","2021-01-17",1);
-$events->addEvent("Vacation","2021-01-01",9);
+$calendar = new Calendar(1, 2026, 0, true);
+$events = new Events(1, 2026);
+$events->addEvent("My brother's birthday", new \DateTime("2026-01-17"), null, 1);
+$events->addEvent("Vacation", new \DateTime("2026-01-01"), null, 9);
 $month = $events->getMonth();
 $year = $events->getYear();
 $days = $events->getDays();

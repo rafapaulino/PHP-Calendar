@@ -55,7 +55,7 @@ use Calendar\Calendar;
 
 $calendar = new Calendar(
     1, //month
-    2021, //year
+    2026, //year
     0, //first day of week 0-6
     true //show 42 days in calendar collumns
 );

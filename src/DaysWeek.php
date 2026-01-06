@@ -17,6 +17,9 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use stdClass;
 use Tightenco\Collect\Support\Collection;
+use DateTime;
+use IntlDateFormatter;
+use Calendar\Traits\ResolvesLocale;
 
 /**
  * Class DaysWeek
@@ -29,6 +32,8 @@ use Tightenco\Collect\Support\Collection;
  */
 class DaysWeek
 {
+    use ResolvesLocale;
+
     /**
      * Variable with days of week collection
      *
@@ -37,12 +42,20 @@ class DaysWeek
     protected Collection $days;
 
     /**
+     * Locale used to format days
+     * @param string $locale
+     * @var string
+     */
+    protected string $locale;
+
+    /**
      * DaysWeek constructor.
      *
      * @return self
      */
     public function __construct()
     {
+        $this->locale = $this->resolveLocale();
         $this->setDays();
 
         return $this;
@@ -67,130 +80,61 @@ class DaysWeek
     {
         $this->days = new Collection(
             [
-            0 => $this->sunday(),
-            1 => $this->monday(),
-            2 => $this->tuesday(),
-            3 => $this->wednesday(),
-            4 => $this->thursday(),
-            5 => $this->friday(),
-            6 => $this->saturday()
+                0 => $this->makeDay(0),
+                1 => $this->makeDay(1),
+                2 => $this->makeDay(2),
+                3 => $this->makeDay(3),
+                4 => $this->makeDay(4),
+                5 => $this->makeDay(5),
+                6 => $this->makeDay(6)
             ]
         );
 
         return $this;
     }
 
-    /**
-     * Format sunday in stdClass
-     *
-     * @return stdClass
-     */
-    #[Pure] protected function sunday(): stdClass
-    {
-        $obj = new stdClass();
-        $obj->letter = _("S");
-        $obj->shortName = _("Sun");
-        $obj->fullName = _("Sunday");
-        $obj->name = "Sunday";
-        $obj->index = 0;
-        return $obj;
-    }
 
-    /**
-     * Format monday in stdClass
-     *
-     * @return stdClass
-     */
-    #[Pure] protected function monday(): stdClass
+    #[Pure] protected function makeDay(int $index): stdClass
     {
-        $obj = new stdClass();
-        $obj->letter = _("M");
-        $obj->shortName = _("Mon");
-        $obj->fullName = _("Monday");
-        $obj->name = "Monday";
-        $obj->index = 1;
-        return $obj;
-    }
+        // 0 = domingo
+        $date = new DateTime("Sunday +{$index} days");
 
-    /**
-     * Format tuesday in stdClass
-     *
-     * @return stdClass
-     */
-    #[Pure] protected function tuesday(): stdClass
-    {
-        $obj = new stdClass();
-        $obj->letter = _("T");
-        $obj->shortName = _("Tue");
-        $obj->fullName = _("Tuesday");
-        $obj->name = "Tuesday";
-        $obj->index = 2;
-        return $obj;
-    }
+        $fullFormatter = new IntlDateFormatter(
+            $this->locale,
+            IntlDateFormatter::NONE,
+            IntlDateFormatter::NONE,
+            null,
+            null,
+            'EEEE'
+        );
 
-    /**
-     * Format wednesday in stdClass
-     *
-     * @return stdClass
-     */
-    #[Pure] protected function wednesday(): stdClass
-    {
-        $obj = new stdClass();
-        $obj->letter = _("W");
-        $obj->shortName = _("Wed");
-        $obj->fullName = _("Wednesday");
-        $obj->name = "Wednesday";
-        $obj->index = 3;
-        return $obj;
-    }
+        $shortFormatter = new IntlDateFormatter(
+            $this->locale,
+            IntlDateFormatter::NONE,
+            IntlDateFormatter::NONE,
+            null,
+            null,
+            'EEE'
+        );
 
-    /**
-     * Format thursday in stdClass
-     *
-     * @return stdClass
-     */
-    #[Pure] protected function thursday(): stdClass
-    {
-        $obj = new stdClass();
-        $obj->letter = _("T");
-        $obj->shortName = _("Thu");
-        $obj->fullName = _("Thursday");
-        $obj->name = "Thursday";
-        $obj->index = 4;
-        return $obj;
-    }
+        $letterFormatter = new IntlDateFormatter(
+            $this->locale,
+            IntlDateFormatter::NONE,
+            IntlDateFormatter::NONE,
+            null,
+            null,
+            'EEEEE'
+        );
 
-    /**
-     * Format friday in stdClass
-     *
-     * @return stdClass
-     */
-    #[Pure] protected function friday(): stdClass
-    {
         $obj = new stdClass();
-        $obj->letter = _("F");
-        $obj->shortName = _("Fri");
-        $obj->fullName = _("Friday");
-        $obj->name = "Friday";
-        $obj->index = 5;
-        return $obj;
-    }
+        $obj->letter = mb_strtoupper($letterFormatter->format($date));
+        $obj->shortName = ucfirst($shortFormatter->format($date));
+        $obj->fullName = ucfirst($fullFormatter->format($date));
+        $obj->name = $date->format('l'); // nome interno em inglês
+        $obj->index = $index;
 
-    /**
-     * Format saturday in stdClass
-     *
-     * @return stdClass
-     */
-    #[Pure] protected function saturday(): stdClass
-    {
-        $obj = new stdClass();
-        $obj->letter = _("S");
-        $obj->shortName = _("Sat");
-        $obj->fullName = _("Saturday");
-        $obj->name = "Saturday";
-        $obj->index = 6;
         return $obj;
-    }
+    }    
 
     /**
      * Set the first day of week between 0-6

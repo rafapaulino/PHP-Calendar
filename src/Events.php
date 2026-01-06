@@ -13,9 +13,9 @@
 
 namespace Calendar;
 
-use PhpParser\Node\Expr\Array_;
 use Tightenco\Collect\Support\Collection;
 use Carbon\Carbon;
+use DateTimeInterface;
 
 
 class Events extends Calendar
@@ -28,26 +28,51 @@ class Events extends Calendar
         $this->events = array();
     }
 
-    public function addEvent(string $event, string $date, int $days = 1)
+    /**
+     * Add an event.
+     *
+     * @param string $event
+     * @param DateTimeInterface $datetime
+     * @param array|null $details
+     * @param int $days
+     *
+     * @return void
+     */
+    public function addEvent(string $event, DateTimeInterface $datetime, ?array $details = null, int $days = 1): void
     {
+        $eventData = [
+            'event' => $event,
+            'details' => $details,
+            'datetime' => $datetime->format('Y-m-d H:i:s'),
+        ];
+
         if ($days > 1) {
-            $end = Carbon::createFromFormat('Y-m-d', $date)->addDays($days)->toDate();
-            $period = Carbon::parse($date)->toPeriod($end, '1 day');
+            $start = Carbon::instance($datetime)->startOfDay();
+            $end = (clone $start)->addDays($days - 1)->endOfDay();
+            $period = Carbon::instance($start)->toPeriod($end, '1 day');
 
             foreach ($period as $date) {
-                $this->prependEvent($date->toDateString(),$event);
+                $this->prependEvent($date->toDateString(), $eventData);
             }
         } else {
-            $this->prependEvent($date,$event);
+            $this->prependEvent($datetime->format('Y-m-d'), $eventData);
         }
     }
 
-    protected function prependEvent($date,$event)
+    /**
+     * Prepend event data into the events array grouped by Y-m-d date key.
+     *
+     * @param string $dateKey
+     * @param array $eventData
+     *
+     * @return void
+     */
+    protected function prependEvent(string $dateKey, array $eventData): void
     {
-        if (array_key_exists($date,$this->events)) {
-            array_push($this->events[$date], $event);
+        if (array_key_exists($dateKey, $this->events)) {
+            array_push($this->events[$dateKey], $eventData);
         } else {
-            $this->events[$date] = [$event];
+            $this->events[$dateKey] = [$eventData];
         }
     }
 

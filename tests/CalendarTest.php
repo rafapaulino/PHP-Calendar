@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use Calendar\Calendar;
 

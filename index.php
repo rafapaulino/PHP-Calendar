@@ -82,7 +82,7 @@ use Calendar\Events;
 
 echo '<div class="calendars">';
 foreach (range(1,12) as $mes):
-    $calendar = new Calendar($mes,2025, 0, true);
+    $calendar = new Calendar($mes,2026, 0, true);
     $month = $calendar->getMonth();
     $year = $calendar->getYear();
     $days = $calendar->getDays();
@@ -109,10 +109,10 @@ echo '</div>';
 ?>
 <hr>
 <?php
-$events = new Events(12,2025);
-$events->addEvent("Festa", new \DateTime('2025-12-17 00:00:00'), ["Festa de confraternização"], 1);
-$events->addEvent("Futebol", new \DateTime('2025-12-17 15:00:00'), ["Jogo amistoso"], 1);
-$events->addEvent("Saída", new \DateTime('2025-12-17 16:00:00'), null, 1);
+$events = new Events(12,2026);
+$events->addEvent("Festa", new \DateTime('2026-12-17 00:00:00'), ["Festa de confraternização"], 1);
+$events->addEvent("Futebol", new \DateTime('2026-12-17 15:00:00'), ["Jogo amistoso"], 1);
+$events->addEvent("Saída", new \DateTime('2026-12-17 16:00:00'), null, 1);
 $events->addEvent("Quase um mês para a saída", new \DateTime('2025-12-26 00:00:00'), ["Preparativos"], 1);
 $month = $events->getMonth();
 $year = $events->getYear();

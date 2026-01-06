@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use Calendar\Events;
 
@@ -21,10 +21,10 @@ class EventsTest extends TestCase
 
     public function testTotalEvents() :void
     {
-        $this->events->addEvent("Evento 01","2021-01-22", 1);
-        $this->events->addEvent("Evento 02","2021-01-25", 2);
+        $this->events->addEvent("Evento 01", Carbon::parse("2021-01-22"), null, 1);
+        $this->events->addEvent("Evento 02", Carbon::parse("2021-01-25"), null, 2);
         $events = $this->events->getEvents();
-        $this->assertEquals(4, count($events));
+        $this->assertCount(3, $events);
     }
 
     public function testYear() :void

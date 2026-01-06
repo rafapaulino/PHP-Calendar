@@ -16,7 +16,7 @@ namespace Calendar;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use stdClass;
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 use DateTime;
 use IntlDateFormatter;
 use Calendar\Traits\ResolvesLocale;

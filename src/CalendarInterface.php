@@ -14,7 +14,7 @@
 namespace Calendar;
 
 use stdClass;
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * Mandatory methods to create a calendar

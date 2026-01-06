@@ -13,7 +13,7 @@
 
 namespace Calendar;
 
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use DateTimeInterface;
 

@@ -16,7 +16,7 @@ namespace Calendar;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Pure;
 use stdClass;
-use Tightenco\Collect\Support\Collection;
+use Illuminate\Support\Collection;
 use Carbon\Carbon;
 
 /**
@@ -253,7 +253,8 @@ class Calendar implements CalendarInterface
         $dayWeek = $end->dayOfWeek;
 
         if ($full) {
-            $start = Carbon::createFromDate($this->getStart());
+            $start = Carbon::createFromDate($this->getStart())->startOfDay();
+            $end = $end->copy()->startOfDay();
             $difference = $start->diffInDays($end);
             $days = Calendar::CALENDAR_MAX_DAYS - $difference;
             $end = $end->copy()->addDays($days);
